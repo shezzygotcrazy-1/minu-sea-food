@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Minu Seafoods</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky top bar, split hero with a grade-sheet card, then full-width bands for each section. */
+:root {
+  --bg: #f2f6f7;
+  --surface: #ffffff;
+  --band: #e3edef;
+  --ink: #0b2a33;
+  --muted: #4a6670;
+  --line: #c9d9dd;
+  --accent: #0b6e72;
+  --accent-ink: #ffffff;
+  --signal: #d9482b;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1d23; --surface: #112a32; --band: #0e242b; --ink: #e8f2f4; --muted: #9bb6be;
+    --line: #25434c; --accent: #4fc3c1; --accent-ink: #062226; --signal: #ff7a5c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1d23; --surface: #112a32; --band: #0e242b; --ink: #e8f2f4; --muted: #9bb6be;
+  --line: #25434c; --accent: #4fc3c1; --accent-ink: #062226; --signal: #ff7a5c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; padding-inline: 0; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.mono { font-family: var(--font-mono); }
+.ph { background: color-mix(in srgb, var(--signal) 16%, transparent); border-bottom: 2px dashed var(--signal); padding: 0 3px; border-radius: 2px; }
+
+/* top bar */
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: -.01em; }
+.brand svg { width: 38px; height: 38px; flex: none; }
+.brand small { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 10px; letter-spacing: .18em; color: var(--muted); }
+nav { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+nav a { text-decoration: none; font-weight: 500; font-size: 14px; padding: 8px 10px; border-radius: 6px; color: var(--muted); }
+nav a:hover { color: var(--ink); background: var(--band); }
+nav a.cta { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+nav a.cta:hover { background: var(--accent); filter: brightness(1.1); }
+
+/* hero */
+.hero { padding-block: 56px 64px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 40px; align-items: center; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); font-weight: 800; letter-spacing: -.025em; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lead { font-size: 1.15rem; color: var(--muted); max-width: 52ch; margin-top: 20px; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.btn { display: inline-block; text-decoration: none; font-weight: 600; padding: 13px 22px; border-radius: 8px; border: 2px solid var(--accent); background: var(--accent); color: var(--accent-ink); cursor: pointer; font-family: inherit; font-size: 15px; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn:hover { filter: brightness(1.08); }
+.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--ink) 45%, transparent); }
+.sheet h3 { font-size: 1.05rem; }
+.sheet .sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.sheet table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+.sheet th { text-align: left; font-family: var(--font-mono); font-weight: 400; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--line); }
+.sheet td { padding: 9px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
+.sheet td:nth-child(2), .sheet td:nth-child(3) { font-family: var(--font-mono); font-size: 13px; }
+.sheet .note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; padding: 2px 8px; border-radius: 4px; background: var(--band); color: var(--accent); }
+
+/* bands */
+section { padding-block: 64px; }
+section.alt { background: var(--band); }
+.sec-head { max-width: 62ch; margin-bottom: 36px; display: grid; gap: 10px; }
+.sec-head h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.02em; }
+.sec-head p { color: var(--muted); }
+
+.points { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.point { border-top: 3px solid var(--accent); padding-top: 14px; }
+.point h3 { font-size: 1.15rem; margin-bottom: 6px; }
+.point p { color: var(--muted); font-size: 15px; }
+
+.services { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.service { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 10px; align-content: start; }
+.service svg { width: 34px; height: 34px; color: var(--accent); }
+.service h3 { font-size: 1.2rem; }
+.service p { color: var(--muted); font-size: 15px; }
+
+/* products */
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.tab { font: inherit; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.tab[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.prods { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.prod { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; }
+.prod .pic { aspect-ratio: 16 / 9; display: grid; place-items: center; background: linear-gradient(180deg, var(--band), color-mix(in srgb, var(--accent) 14%, var(--band))); max-width: 100%; }
+.prod .pic svg { width: 78%; height: auto; max-height: 90%; }
+.pic .af { fill: var(--accent); }
+.pic .as { fill: none; stroke: var(--accent); stroke-linecap: round; stroke-linejoin: round; }
+.pic .ai { fill: var(--bg); }
+.pic .ab { fill: none; stroke: var(--surface); stroke-linecap: round; }
+.prod .body { padding: 16px; display: grid; gap: 8px; }
+.prod h3 { font-size: 1.05rem; }
+.prod .forms { display: flex; flex-wrap: wrap; gap: 6px; }
+.prod .grade { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+/* process */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.steps li { padding: 18px; border-inline-end: 1px solid var(--line); border-block-end: 1px solid var(--line); margin-inline-end: -1px; margin-block-end: -1px; display: grid; gap: 4px; align-content: start; }
+.steps .temp { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+.steps h3 { font-size: 1rem; }
+.steps p { font-size: 13.5px; color: var(--muted); }
+
+.serve { display: flex; flex-wrap: wrap; gap: 10px; }
+.serve span { border: 1px solid var(--line); background: var(--surface); padding: 10px 18px; border-radius: 8px; font-weight: 500; }
+
+/* faq */
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0 18px; }
+details + details { margin-top: 10px; }
+summary { cursor: pointer; padding: 16px 0; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; list-style-position: outside; }
+details p { padding-bottom: 16px; color: var(--muted); max-width: 70ch; }
+
+/* contact */
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+form { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 14px; }
+label { display: grid; gap: 5px; font-weight: 600; font-size: 14px; }
+input, select, textarea { font: inherit; font-weight: 400; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; width: 100%; min-width: 0; }
+textarea { min-height: 90px; resize: vertical; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.out { background: var(--band); border: 1px dashed var(--accent); border-radius: 8px; padding: 14px; font-family: var(--font-mono); font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere; display: none; }
+.out.on { display: block; }
+.status { font-size: 14px; color: var(--accent); min-height: 1.4em; }
+.facts { display: grid; gap: 16px; }
+.fact { display: grid; gap: 2px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.fact .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.fact .v { font-size: 1.05rem; font-weight: 500; overflow-wrap: anywhere; }
+
+footer { padding-block: 32px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+.foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 820px) {
+  .hero-grid, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero { padding-block: 36px 44px; }
+  section { padding-block: 48px; }
+  nav a:not(.cta) { padding: 6px 8px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Minu Seafoods home">
+      <!-- Placeholder logo mark: replace with Minu's own logo -->
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="var(--accent)"/><path d="M7 21c4-6 9-8 14-8 5 0 9 3 12 7-3 4-7 7-12 7-5 0-10-2-14-6z" fill="var(--accent-ink)"/><path d="M31 20l5-5v10z" fill="var(--accent-ink)"/><circle cx="14" cy="19" r="1.6" fill="var(--accent)"/></svg>
+      <span>Minu Seafoods<small>FRESH &middot; FROZEN &middot; EXPORT</small></span>
+    </a>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#products">Products</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#contact">Enquire</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Seafood supplier</p>
+        <h1>Seafood kept <em>cold</em> from landing to your door.</h1>
+        <p class="lead">Minu Seafoods sources, grades, packs and ships fish, prawns, crab and squid for hotels, restaurants, caterers, supermarkets and importers. You get consistent sizes, clean packing and a delivery date you can plan around.</p>
+        <div class="btns">
+          <a class="btn" href="#contact">Request a quote</a>
+          <a class="btn ghost" href="#products">See the range</a>
+        </div>
+      </div>
+      <aside class="sheet" aria-label="Sample grade sheet">
+        <span class="tag">EXAMPLE</span>
+        <h3 style="margin-top:10px">Sample grade sheet</h3>
+        <p class="sub">The kind of detail we quote against. Replace with Minu's real specs.</p>
+        <table>
+          <thead><tr><th>Item</th><th>Grade</th><th>Pack</th></tr></thead>
+          <tbody>
+            <tr><td>Vannamei prawn, HLSO</td><td>21/25</td><td>10 x 1 kg</td></tr>
+            <tr><td>Squid tube, cleaned</td><td>U/5</td><td>10 kg block</td></tr>
+            <tr><td>Pomfret, whole</td><td>300-500 g</td><td>IQF, 10 kg</td></tr>
+            <tr><td>Blue swimmer crab</td><td>Meat, lump</td><td>Cup, 454 g</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Core storage at -18&deg;C or colder.</p>
+      </aside>
+    </div>
+  </div>
+
+  <section id="about" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">What we do</p>
+        <h2>One supplier for sourcing, processing and delivery.</h2>
+        <p>Buyers come to us because the box they open matches the spec they ordered. We keep the steps in-house or tightly managed so that holds on every shipment.</p>
+      </div>
+      <div class="points">
+        <div class="point"><h3>Fresh daily catch</h3><p>Landings are checked, iced and graded the same day so the catch reaches processing at its best.</p></div>
+        <div class="point"><h3>Hygienic handling</h3><p>Clean-room style processing, washed and sorted by size, with batch records kept for every lot.</p></div>
+        <div class="point"><h3>Responsible sourcing</h3><p>We buy from landing centres and farms that follow sensible catch and harvest practices.</p></div>
+        <div class="point"><h3>Packing that travels</h3><p>Food-grade liners, sealed cartons and clear labels, built for long cold-chain journeys.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Services</p>
+        <h2>What you can ask us to handle.</h2>
+        <p>Order a standard pack from the range, or ask for something built around your kitchen, shelf or shipping container.</p>
+      </div>
+      <div class="services">
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>
+          <h3>Sourcing</h3>
+          <p>We buy from trusted landing centres, farms and partner processors, and compare price, size and quality for you.</p>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg>
+          <h3>Processing and freezing</h3>
+          <p>Cleaning, peeling, filleting, grading and freezing as IQF, block or fresh-chilled, to the form you specify.</p>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+          <h3>Cold-chain logistics</h3>
+          <p>Reefer transport, container loading and shipping paperwork, with temperature checked at each handover.</p>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg>
+          <h3>Custom and private-label packs</h3>
+          <p>Retail packs, branded cartons and special weights for supermarkets and distributors.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Products</p>
+        <h2>The range.</h2>
+        <p>Sample list. Replace it with Minu's actual species, grades and pack sizes. The drawings can be swapped for your own photos at any time.</p>
+      </div>
+      <div class="tabs" role="group" aria-label="Filter products" id="tabs">
+        <button class="tab" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="tab" type="button" data-f="fish" aria-pressed="false">Fish</button>
+        <button class="tab" type="button" data-f="crust" aria-pressed="false">Crustaceans</button>
+        <button class="tab" type="button" data-f="ceph" aria-pressed="false">Cephalopods</button>
+        <button class="tab" type="button" data-f="fresh" aria-pressed="false">Freshwater</button>
+      </div>
+      <div class="prods" id="prods"></div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">From water to warehouse</p>
+        <h2>Six handovers, each with a temperature.</h2>
+        <p>Every lot passes the same checkpoints. Targets shown are typical for frozen product; fresh-chilled lots stay on ice.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="temp">0 to 4&deg;C</span><h3>Landing</h3><p>Catch is received, iced and logged by source and time.</p></li>
+        <li><span class="temp">0 to 4&deg;C</span><h3>Grading</h3><p>Sorted by species, count per kg and quality.</p></li>
+        <li><span class="temp">Below 10&deg;C</span><h3>Processing</h3><p>Washed, cleaned and cut to the order form.</p></li>
+        <li><span class="temp">-35&deg;C or lower</span><h3>Freezing</h3><p>IQF or block, frozen fast to hold texture.</p></li>
+        <li><span class="temp">-18&deg;C or lower</span><h3>Packing</h3><p>Glazed, weighed, boxed and labelled with batch codes.</p></li>
+        <li><span class="temp">-18&deg;C or lower</span><h3>Dispatch</h3><p>Loaded into reefers with temperature records.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Who we supply</p>
+        <h2>Built for repeat buyers.</h2>
+      </div>
+      <div class="serve">
+        <span>Hotels</span><span>Restaurants</span><span>Caterers</span><span>Supermarkets</span><span>Distributors</span><span>Importers</span><span>Households (bulk packs)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap" style="max-width:820px">
+      <div class="sec-head">
+        <p class="eyebrow">Questions</p>
+        <h2>Before you order.</h2>
+      </div>
+      <details open><summary>What is the minimum order?</summary><p>Add Minu's minimum quantity here, for example one carton for local orders and one container for export.</p></details>
+      <details><summary>How do you keep product fresh?</summary><p>Product is iced at landing, processed in a controlled area, frozen quickly and held at storage temperature until a reefer collects it. Temperature is recorded at each step.</p></details>
+      <details><summary>Can you pack to my specification?</summary><p>Yes. Tell us the species, size grade, form (whole, fillet, peeled, IQF or block), pack weight and labelling, and we will confirm what is possible.</p></details>
+      <details><summary>Do you export?</summary><p>Add the countries and documents Minu handles here, such as health certificates and certificates of origin.</p></details>
+      <details><summary>How fast will I get a quote?</summary><p>Add Minu's response time here. Sending the enquiry form below with species, quantity and destination speeds it up.</p></details>
+    </div>
+  </section>
+
+  <section id="contact" class="alt">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="sec-head">
+          <p class="eyebrow">Contact</p>
+          <h2>Tell us what you need.</h2>
+          <p>Fill in the form to build a ready-to-send message, then copy it into WhatsApp or email.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><span class="k">Phone / WhatsApp</span><span class="v"><span class="ph">+91 XXXXX XXXXX</span></span></div>
+          <div class="fact"><span class="k">Email</span><span class="v"><span class="ph">sales@your-domain.com</span></span></div>
+          <div class="fact"><span class="k">Address</span><span class="v"><span class="ph">Office / plant address, city, state</span></span></div>
+          <div class="fact"><span class="k">Hours</span><span class="v"><span class="ph">Mon to Sat, 9:00 to 18:00</span></span></div>
+        </div>
+        <p style="margin-top:14px;font-size:13px;color:var(--muted)">Highlighted details are placeholders. Replace them with Minu's real contact information.</p>
+      </div>
+      <form id="enq" novalidate>
+        <label for="name">Your name<input id="name" autocomplete="name" placeholder="Name and company"></label>
+        <div class="row2">
+          <label for="cat">Product<select id="cat">
+            <option>Prawns and shrimp</option><option>Fish</option><option>Crab and lobster</option><option>Squid, cuttlefish, octopus</option><option>Freshwater fish</option><option>Not sure yet</option>
+          </select></label>
+          <label for="qty">Quantity<input id="qty" placeholder="e.g. 500 kg / 1 x 20 ft"></label>
+        </div>
+        <label for="dest">Delivery location<input id="dest" placeholder="City or port"></label>
+        <label for="msg">Notes<textarea id="msg" placeholder="Size grade, pack weight, delivery date"></textarea></label>
+        <button class="btn" type="submit">Build my message</button>
+        <div class="out" id="out" aria-live="polite"></div>
+        <button class="btn ghost" type="button" id="copy" hidden>Copy message</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>&copy; Minu Seafoods. All rights reserved.</span>
+    <span class="mono">Fresh &middot; Frozen &middot; Export</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var items = [
+    { n: "Vannamei prawn", c: "crust", f: ["HLSO", "PDTO", "Cooked"], g: "Grades 16/20 to 41/50" },
+    { n: "Black tiger prawn", c: "crust", f: ["Head-on", "HLSO"], g: "Grades 8/12 to 21/25" },
+    { n: "Blue swimmer crab", c: "crust", f: ["Whole", "Meat"], g: "Cleaned, graded by weight" },
+    { n: "Squid", c: "ceph", f: ["Whole", "Tube", "Rings"], g: "Sizes U/5 to 20/up" },
+    { n: "Cuttlefish", c: "ceph", f: ["Whole", "Cleaned"], g: "Sizes by pieces per kg" },
+    { n: "Octopus", c: "ceph", f: ["Whole", "Cleaned"], g: "Sizes by weight range" },
+    { n: "Pomfret", c: "fish", f: ["Whole", "IQF"], g: "100 to 600 g" },
+    { n: "Kingfish (surmai)", c: "fish", f: ["Steaks", "Fillet"], g: "Sizes by weight range" },
+    { n: "Ribbon fish", c: "fish", f: ["Whole", "Cut"], g: "Sizes by length" },
+    { n: "Rohu", c: "fresh", f: ["Whole", "Steaks"], g: "1 to 3 kg" },
+    { n: "Pangasius", c: "fresh", f: ["Fillet", "IQF"], g: "Fillet grades by weight" }
+  ];
+  var grid = document.getElementById("prods");
+  var eye = function (x, y) { return '<circle class="ai" cx="' + x + '" cy="' + y + '" r="3"/>'; };
+  function art(n) {
+    var k = n.toLowerCase(), b;
+    if (/prawn/.test(k)) {
+      b = '<path class="as" stroke-width="14" d="M118 32C100 12 60 14 44 40 34 56 40 70 58 72"/>' +
+          '<path class="ab" stroke-width="14" stroke-dasharray="2 10" d="M118 32C100 12 60 14 44 40 34 56 40 70 58 72"/>' +
+          '<path class="as" stroke-width="4" d="M58 72l-14 8M58 72l-3 13M58 72l9 10M120 28C134 20 144 22 150 12M121 34C136 34 148 40 152 50"/>' + eye(110, 30);
+    } else if (/crab/.test(k)) {
+      b = '<ellipse class="af" cx="80" cy="54" rx="34" ry="22"/>' +
+          '<path class="as" stroke-width="4" d="M52 40L36 26M108 40L124 26M50 62L26 72M52 68L32 83M58 72L42 87M110 62L134 72M108 68L128 83M102 72L118 87"/>' +
+          '<circle class="af" cx="34" cy="24" r="11"/><circle class="af" cx="126" cy="24" r="11"/>' +
+          '<path class="ai" d="M34 24l-5-11 10 3z M126 24l5-11-10 3z"/>' + eye(70, 46) + eye(90, 46);
+    } else if (/squid/.test(k)) {
+      b = '<path class="af" d="M18 45Q60 12 112 45 60 78 18 45z"/><path class="af" d="M18 45L6 32v26z"/>' +
+          '<path class="as" stroke-width="5" d="M112 40L150 30M112 45L152 45M112 50L150 60"/>' + eye(100, 40) + eye(100, 50);
+    } else if (/cuttlefish/.test(k)) {
+      b = '<ellipse class="af" cx="68" cy="45" rx="46" ry="21"/><ellipse class="ab" stroke-width="2" cx="68" cy="45" rx="42" ry="17"/>' +
+          '<path class="as" stroke-width="5" d="M114 40L148 32M114 45L150 45M114 50L148 58"/>' + eye(100, 38);
+    } else if (/octopus/.test(k)) {
+      b = '<circle class="af" cx="80" cy="34" r="26"/><rect class="af" x="56" y="40" width="48" height="20" rx="8"/>' +
+          '<path class="as" stroke-width="7" d="M58 58Q44 70 56 82M69 60Q62 74 72 84M91 60Q98 74 88 84M102 58Q116 70 104 82M80 60V84"/>' + eye(70, 44) + eye(90, 44);
+    } else if (/kingfish|ribbon/.test(k)) {
+      b = '<ellipse class="af" cx="72" cy="45" rx="58" ry="14"/><path class="af" d="M128 45L152 28V62z"/>' +
+          '<path class="as" stroke-width="3" d="M50 32Q70 22 96 31"/>' + eye(30, 42);
+    } else {
+      b = '<ellipse class="af" cx="68" cy="45" rx="42" ry="25"/><path class="af" d="M106 45L142 24V66z"/>' +
+          '<path class="as" stroke-width="3" d="M60 21Q74 6 92 22M52 32Q47 45 52 58"/>' + eye(40, 40);
+    }
+    return '<svg viewBox="0 0 160 90" role="img" aria-label="' + esc(n) + ' illustration">' + b + '</svg>';
+  }
+  var labels = { crust: "Crustacean", ceph: "Cephalopod", fish: "Fish", fresh: "Freshwater" };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function render(filter) {
+    grid.innerHTML = items.filter(function (i) { return filter === "all" || i.c === filter; }).map(function (i) {
+      return '<article class="prod"><div class="pic">' + art(i.n) + '</div><div class="body"><h3>' + esc(i.n) + '</h3><div class="forms">' +
+        i.f.map(function (f) { return '<span class="tag">' + esc(f) + '</span>'; }).join("") + '</div><p class="grade">' + esc(i.g) + ' &middot; ' + labels[i.c] + '</p></div></article>';
+    }).join("");
+  }
+  render("all");
+  document.getElementById("tabs").addEventListener("click", function (e) {
+    var b = e.target.closest(".tab"); if (!b) return;
+    document.querySelectorAll(".tab").forEach(function (t) { t.setAttribute("aria-pressed", t === b ? "true" : "false"); });
+    render(b.getAttribute("data-f"));
+  });
+
+  var form = document.getElementById("enq"), out = document.getElementById("out"), copyBtn = document.getElementById("copy"), status = document.getElementById("status");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = function (id) { return document.getElementById(id).value.trim(); };
+    var lines = ["Hello Minu Seafoods,", "I would like a quote.",
+      "Name: " + (v("name") || "-"), "Product: " + v("cat"), "Quantity: " + (v("qty") || "-"),
+      "Delivery to: " + (v("dest") || "-")];
+    if (v("msg")) lines.push("Notes: " + v("msg"));
+    out.textContent = lines.join("\n");
+    out.classList.add("on");
+    copyBtn.hidden = false;
+    status.textContent = "Message ready. Copy it and send it by WhatsApp or email.";
+  });
+  copyBtn.addEventListener("click", function () {
+    var text = out.textContent;
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(out);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      status.textContent = "Text selected. Press Ctrl+C or long-press to copy.";
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { status.textContent = "Copied."; }, fallback);
+    } catch (err) { fallback(); }
+  });
+})();
+</script>
+
+</body>
+</html>
